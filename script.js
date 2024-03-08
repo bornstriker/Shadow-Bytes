@@ -9,8 +9,10 @@ function validateLogin() {
         // fireworksEffect();
         setTimeout(function () {
             alert("PARABÉNS! Sua missão foi concluída com sucesso!\nFale com os administradores para reivindicar sua recompensa.");
-        }, 5000);  // Atraso de 5 segundos para dar tempo para os efeitos
-       window.open("indexs.html"); return false;  // Retorne false para evitar a submissão do formulário padrão
+        }, 5000
+                   window.open("indexs.html");
+                  );  // Atraso de 5 segundos para dar tempo para os efeitos
+       return false;  // Retorne false para evitar a submissão do formulário padrão
     } else {
         alert("Login falhou. Tente novamente.");
         return false;
