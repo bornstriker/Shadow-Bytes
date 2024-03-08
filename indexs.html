@@ -15,18 +15,40 @@
     <style>
         body {
             overflow-x: hidden; /* Para evitar rolagem horizontal */
+            margin: 0; /* Remove a margem padrão do corpo */
+            font-family: Arial, sans-serif; /* Escolha uma fonte adequada */
+            background-color: #000; /* Cor de fundo preta */
+            color: #0F0; /* Cor do texto verde */
+        }
+
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none; /* Impede que o canvas capture eventos do mouse */
         }
 
         .home-content {
-            max-width: 800px; /* Ajuste a largura conforme necessário para o seu design */
-            margin: 0 auto;
-            padding: 0 20px; /* Opcional: Adicione preenchimento nas laterais para melhor legibilidade */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1; /* Define a ordem de empilhamento para aparecer acima do canvas */
         }
 
         /* Adicione este estilo para tornar o parágrafo rolável */
         .home-content p {
             max-height: 400px; /* Ajuste a altura conforme necessário para o seu design */
             overflow-y: auto;
+            font-size: 18px; /* Define o tamanho da fonte */
+            line-height: 1.5; /* Define a altura da linha para melhor legibilidade */
+            margin-bottom: 20px; /* Adiciona margem inferior para espaçamento */
+        }
+
+        .highlighted-text {
+            color: #0F0; /* Cor verde para o texto em destaque */
+            font-weight: bold; /* Texto em negrito */
         }
     </style>
 </head>
@@ -35,65 +57,68 @@
 
     <canvas id="matrixCanvas"></canvas>
     <!-- Matrix -->
-    <script src="/JAVASCRIPT/matrix.js"></script>
+    <script>
+        var matrixCanvas = document.getElementById("matrixCanvas");
+        var ctx = matrixCanvas.getContext("2d");
+
+        // Configurações do canvas
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+        var characters = "01";
+        var fontSize = 10;
+        var columns = matrixCanvas.width / fontSize;
+
+        // Matriz para armazenar a posição vertical de cada caractere
+        var drops = [];
+        for (var i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        // Função para animar o efeito Matrix
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+            ctx.fillStyle = "#0F0"; // Cor dos caracteres
+            ctx.font = fontSize + "px arial";
+
+            for (var i = 0; i < drops.length; i++) {
+                var text = characters[Math.floor(Math.random() * characters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Reinicia a posição vertical quando atinge o fundo
+                if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        // Loop de animação
+        function animateMatrix() {
+            drawMatrix();
+            requestAnimationFrame(animateMatrix);
+        }
+
+        animateMatrix();
+    </script>
 
     <section id="home" class="home">
         <div class="home-content" data-scroll data-scroll-speed="-5">
             <h3 class="mu">Bem Vindo Usuario !</h3>
             <h1>Obrigado por Participar</h1>
 
-            <h3> Parabens a todos os <span class="pro-text">
+            <h3>Parabens a todos os estudantes!</h3>
 
-                    <script>
-                        var typed = new Typed(".pro-text", {
-                            strings: [
-                                " # Ethical Hackers",
-                                " # desenvolvedores",
-                                " # Programadores",
-                                " # estudantes",
-                                " $ QUE CHEGARAM ATE AQUI :)"
-                            ],
-                            typeSpeed: 100,
-                            backSpeed: 100,
-                            backDelay: 1000,
-                            loop: true
-                        });
-                    </script>
-                </span></h3>
+            <p>
+                Parabéns! Você concluiu nosso desafio e provou ser um dos melhores, dando o seu melhor para desvendar a missão que lhe foi dada. Você demonstrou que corre atrás dos seus objetivos. Agora, vá até os administradores do grupo e reivindique seu prêmio.
+            </p>
 
-            <div>
-                <p>
-                    &emsp; &emsp;Parabéns! Você concluiu nosso desafio e provou ser um dos melhores, dando o seu melhor para desvendar a missão que lhe foi dada. Você demonstrou que corre atrás dos seus objetivos. Agora, vá até os administradores do grupo e reivindique seu prêmio. <br> <br>
+            <p>
+                Envie a seguinte mensagem ao seu administrador para garantir que o processo de premiação seja iniciado:
+                <span class="highlighted-text">$h@D0W-B!T3$-CTF</span>
+            </p>
 
-                    &emsp; &emsp;Envie a seguinte mensagem ao seu administrador para garantir que o processo de premiação seja iniciado: <br> <br>
-
-                    &emsp; &emsp;<code>$h@D0W-B!T3$-CTF </code> <br> <br>
-
-                    &emsp; &emsp;Agradecemos mais uma vez por sua participação e parabenizamos você por alcançar este marco significativo. Estamos ansiosos para continuar proporcionando desafios desafiadores e vendo mais conquistas notáveis de sua parte. <br> <br>
-                </p>
-            </div>
-
-            <div class="home-sci">
-                <a href="https://github.com/" target="_blank"><i class='bx bxl-github'></i></a>
-                <a href="https://www.linkedin.com/" target="_blank"><i class='bx bxl-linkedin'></i></a>
-                <a href="https://" target="_blank"><i class='bx bxl-whatsapp'></i></a>
-                <a href="" target="_blank"><i class='bx bxl-instagram'></i></a>
-            </div>
-            
-        </div>
-
-        <div class="home-img">
-            <div class="glowing-circle">
-                <span></span>
-                <span></span>
-                <div class="image">
-                    <img src="/IMAGES/saianon.png" alt="">
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-</body>
-
-</html>
+            <p>
+                Agradecemos mais uma vez por sua participação e parabeniz
