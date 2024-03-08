@@ -5,8 +5,8 @@ function validateLogin() {
 
     // Simulação da validação no lado do frontend
     if (username === "admin" && password === "admin") {
-        celebrationEffect();
-        fireworksEffect();
+       // celebrationEffect();
+        // fireworksEffect();
         setTimeout(function () {
             alert("PARABÉNS! Sua missão foi concluída com sucesso!\nFale com os administradores para reivindicar sua recompensa.");
         }, 5000);  // Atraso de 5 segundos para dar tempo para os efeitos
